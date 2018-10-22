@@ -1,0 +1,18 @@
+	class Edge implements Comparable<Edge> {
+		int src, dest, weight;
+
+		Edge(int s, int d, int w) {
+			src = s;
+			dest = d;
+			weight = w;
+		}
+
+		@Override
+		public int compareTo(Edge o) {
+		  return (int)(this.weight - o.weight);
+		}
+	  
+	}
+
+
+    Arrays.sort(edge);

@@ -1,14 +1,14 @@
-public class DoubleLinkedList{
+package oata.basics;
+
+public class LinkedList{
 
     public class Node { 
         int data;
         Node next;
-        Node prev;
 
         Node(int value){
             data = value;
             next = null;
-            prev = null;
         }
     }
 
@@ -25,7 +25,6 @@ public class DoubleLinkedList{
                 tmp = tmp.next;
             }
             tmp.next = node;
-            node.prev = tmp;
         }
     }
 
@@ -36,7 +35,6 @@ public class DoubleLinkedList{
         if(tmp == null){
             this.head = node;
         } else {
-            this.head.prev = node;
             node.next = this.head;
             this.head = node;
         }
@@ -51,12 +49,9 @@ public class DoubleLinkedList{
                 System.out.println("Found the counter " + counter);
                 if(prev == null){
                     this.head = curr.next;
-                    this.head.prev = null;
                     break;
                 } else {
-                    Node tmp = prev;
                     prev.next = curr.next;
-                    curr.prev = tmp;
                     break;
                 }
             }
@@ -65,29 +60,24 @@ public class DoubleLinkedList{
            counter++;
         }
     }
-
+    //Reverse TODO
     public void reverse(){
-        this.head = reverseLocal();
-    }
-
-    //Reverse 
-    public Node reverseLocal(){
-        Node tmp = null;
+        Node prev = null, next = null;
         Node curr = this.head;
 
         while(curr != null){
-        tmp = curr.prev;
-        curr.prev = curr.next;
-        curr.next = tmp;
+          // store next node
+        next = curr.next;
+        // Now change next of current
+        // This is where actual reversing happens
+        curr.next = prev;
 
-        curr = curr.prev;
+        // Move prev and curr one step forward
+        prev = curr;
+        curr = next;
+        }
+        this.head = prev;
     }
-    if(tmp != null)
-        return tmp.prev;
-
-    return null;
-    
-}
 
     //Reverse in batches?
 
@@ -102,7 +92,7 @@ public class DoubleLinkedList{
     public static void main(String[] args){
         System.out.println("Hello world!");
 
-        DoubleLinkedList ll = new DoubleLinkedList();
+        LinkedList ll = new LinkedList();
         ll.push(1);
         ll.push(5);
         ll.push(3);
@@ -127,5 +117,6 @@ public class DoubleLinkedList{
         ll.reverse();
         System.out.println("Printing linked list:");
         ll.print();     
+
     }
 }

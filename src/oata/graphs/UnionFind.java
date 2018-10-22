@@ -6,7 +6,7 @@ import java.util.*;
 import java.lang.*; 
 import java.io.*; 
   
-public class Graph 
+public class UnionFind 
 { 
     int V, E;    // V-> no. of vertices & E->no.of edges 
     Edge edge[]; // /collection of all edges 
@@ -17,7 +17,7 @@ public class Graph
     }; 
   
     // Creates a graph with V vertices and E edges 
-    Graph(int v,int e) 
+    UnionFind(int v,int e) 
     { 
         V = v; 
         E = e; 
@@ -70,7 +70,7 @@ public class Graph
         |    \ 
         1-----2 */
         int V = 3, E = 3; 
-        Graph graph = new UnionFind(V, E); 
+        UnionFind graph = new UnionFind(V, E); 
   
         // add edge 0-1 
         graph.edge[0].src = 0; 

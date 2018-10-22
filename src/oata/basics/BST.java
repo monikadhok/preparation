@@ -1,5 +1,6 @@
-public class BST{
+package oata.basics;
 
+public class BST{
     class Node{
         int data;
         Node left;
