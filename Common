@@ -16,3 +16,9 @@
 
 
     Arrays.sort(edge);
+
+
+
+Egg dropping problem complexity is nk^2
+
+		
