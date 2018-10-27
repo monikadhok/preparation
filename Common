@@ -17,8 +17,190 @@
 
     Arrays.sort(edge);
 
-
-
 Egg dropping problem complexity is nk^2
 
-		
+Single linked list 
+
+   //Reverse TODO
+    public void reverse(){
+        Node prev = null, next = null;
+        Node curr = this.head;
+
+        while(curr != null){
+          // store next node
+        next = curr.next;
+        // Now change next of current
+        // This is where actual reversing happens
+        curr.next = prev;
+
+        // Move prev and curr one step forward
+        prev = curr;
+        curr = next;
+        }
+        this.head = prev;
+    }
+
+Double reverse 
+
+//Reverse 
+    public Node reverseLocal(){
+        Node tmp = null;
+        Node curr = this.head;
+
+        while(curr != null){
+        tmp = curr.prev;
+        curr.prev = curr.next;
+        curr.next = tmp;
+
+        curr = curr.prev;
+    }
+    if(tmp != null)
+        return tmp.prev;
+
+    return null;
+    
+	Double delete
+
+	   public void deleteAt(int idx){
+        int counter = 0;
+        Node prev = null;
+        Node curr = this.head;
+        while(curr != null){
+            if(counter == idx){
+                System.out.println("Found the counter " + counter);
+                if(prev == null){
+                    this.head = curr.next;
+                    this.head.prev = null;
+                    break;
+                } else {
+                    Node tmp = prev;
+                    prev.next = curr.next;
+                    curr.prev = tmp;
+                    break;
+                }
+            }
+            prev = curr;
+           curr = curr.next;
+           counter++;
+        }
+    }
+
+Dijskra's : 
+      key[0] = 0;
+       
+        for (int i = 0; i < V; i++) {
+            // Get the vertex with minimum key
+            int vert = minKey(key, mstSet, V);
+
+            // Adds up the weights
+            mstSet[vert] = true;
+
+            // Update keys
+            for (int k = 0; k < V; k++) {
+                if (graph[vert][k] != 0 && !mstSet[k] && key[k] > key[vert] + graph[vert][k]) {
+                    key[k] = key[vert] + graph[vert][k];
+
+
+Three conditions : 
+adjacent 
+not included in mstSet
+and key value lower
+
+
+Graph traversal : 
+
+ public void TopologicalSort() {
+        System.out.println("Starting topological traversal!");
+        boolean visited[] = new boolean[this.V];
+        TopologicalUtil(0, visited);
+    }
+
+    public void TopologicalUtil(int u, boolean visited[]) {
+        Iterator itr = adj[u].iterator();
+        while (itr.hasNext()) {
+            int vert = (int) itr.next();
+            TopologicalUtil(vert, visited);
+        }
+
+        if (!visited[u]) {
+            System.out.println(u);
+            visited[u] = true;
+        } else
+            return;
+    }
+
+    // DFS
+    public void DFS() {
+        System.out.println("Starting DFS traversal!");
+        boolean visited[] = new boolean[this.V];
+        DFSUtil(0, visited);
+    }
+
+    public void DFSUtil(int u, boolean visited[]) {
+        if (!visited[u]) {
+            System.out.println(u);
+            visited[u] = true;
+        } else
+            return;
+
+        Iterator itr = adj[u].iterator();
+        while (itr.hasNext()) {
+            int vert = (int) itr.next();
+            DFSUtil(vert, visited);
+        }
+    }
+
+
+    #Level order traversal of tree is same as BFS for graphs 
+
+    #0-1 knapsack problem is dynamic programming one 
+
+    # Independent set problem 
+
+  
+// The function returns size of the largest independent set in a given  
+// binary tree 
+int LISS(struct node *root) 
+{ 
+    if (root == NULL) 
+       return 0; 
+  
+    // Caculate size excluding the current node 
+    int size_excl = LISS(root->left) + LISS(root->right); 
+  
+    // Calculate size including the current node 
+    int size_incl = 1; 
+    if (root->left) 
+       size_incl += LISS(root->left->left) + LISS(root->left->right); 
+    if (root->right) 
+       size_incl += LISS(root->right->left) + LISS(root->right->right); 
+  
+    // Return the maximum of two sizes 
+    return max(size_incl, size_excl); 
+} 
+
+#Vertex cover 
+  
+// The function returns size of the minimum vertex cover 
+int vCover(struct node *root) 
+{ 
+    // The size of minimum vertex cover is zero if tree is empty or there 
+    // is only one node 
+    if (root == NULL) 
+        return 0; 
+    if (root->left == NULL && root->right == NULL) 
+        return 0; 
+  
+    // Calculate size of vertex cover when root is part of it 
+    int size_incl = 1 + vCover(root->left) + vCover(root->right); 
+  
+    // Calculate size of vertex cover when root is not part of it 
+    int size_excl = 0; 
+    if (root->left) 
+      size_excl += 1 + vCover(root->left->left) + vCover(root->left->right); 
+    if (root->right) 
+      size_excl += 1 + vCover(root->right->left) + vCover(root->right->right); 
+  
+    // Return the minimum of two sizes 
+    return min(size_incl, size_excl); 
+} 
